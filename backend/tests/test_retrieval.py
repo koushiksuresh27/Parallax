@@ -27,18 +27,15 @@ async def test_semantic_retrieval():
     """Test that Qdrant returns document chunks for a relevant query."""
     from app.retrieval.semantic import retrieve_documents
 
-    fake_vector = [0.05] * 1536
-    with patch("langchain_openai.OpenAIEmbeddings.embed_documents", return_value=[fake_vector]), \
-         patch("langchain_openai.OpenAIEmbeddings.aembed_query", AsyncMock(return_value=fake_vector)):
-        results = await retrieve_documents("delivery delays logistics", k=3)
-        print(f"Semantic results: {len(results)} documents")
-        for r in results:
-            print(f"  - [{r['source_type']}] chunk_index={r.get('chunk_index')}: {r['content'][:100]}...")
+    results = await retrieve_documents("delivery delays logistics", k=3)
+    print(f"Semantic results: {len(results)} documents")
+    for r in results:
+        print(f"  - [{r['source_type']}] chunk_index={r.get('chunk_index')}: {r['content'][:100]}...")
 
-        assert isinstance(results, list)
-        for r in results:
-            assert r["source_type"] == "document"
-            assert "content" in r
+    assert isinstance(results, list)
+    for r in results:
+        assert r["source_type"] == "document"
+        assert "content" in r
 
 
 @pytest.mark.asyncio

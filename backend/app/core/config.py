@@ -21,10 +21,13 @@ class Settings(BaseSettings):
     # OpenAI
     OPENAI_API_KEY: str = ""
 
-    # Embeddings
-    EMBEDDING_MODEL: str = "text-embedding-3-small"
+    # LLM Settings (Groq)
+    GROQ_MODEL: str = "qwen/qwen3.8-27b"
+
+    # Embeddings (Local FastEmbed - Hugging Face BAAI/bge-small-en-v1.5)
+    EMBEDDING_MODEL: str = "BAAI/bge-small-en-v1.5"
     QDRANT_COLLECTION: str = "parallax_documents"
-    EMBEDDING_DIMENSION: int = 1536
+    EMBEDDING_DIMENSION: int = 384
 
     # App
     APP_ENV: str = "development"

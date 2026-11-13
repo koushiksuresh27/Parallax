@@ -16,4 +16,5 @@ class InvestigationState(TypedDict):
     retry_count: int                # Tracks verification retries
     current_node: str               # For frontend progress tracking
     error: str                      # Error message if something fails
+    metrics: dict                   # Telemetry timings & metrics
 

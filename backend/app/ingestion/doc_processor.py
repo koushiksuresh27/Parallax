@@ -7,16 +7,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.models.sources import DocumentChunk
 from app.ingestion.embeddings import get_or_compute_embeddings_batch
+from app.ingestion.document_processor import chunk_document
 
 # Chunking config
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
-
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=CHUNK_SIZE,
-    chunk_overlap=CHUNK_OVERLAP,
-    length_function=len,
-)
 
 
 def extract_text_from_file(file_path: str, file_type: str) -> list[dict]:

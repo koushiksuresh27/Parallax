@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
 from app.core.config import settings
+from app.core.llm_client import get_chat_llm
 from app.investigation.state import InvestigationState
 
 report_prompt = ChatPromptTemplate.from_messages([
@@ -48,11 +49,7 @@ Limitations:
 
 
 def get_llm():
-    return ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0,
-        openai_api_key=settings.OPENAI_API_KEY,
-    )
+    return get_chat_llm(temperature=0.0)
 
 
 async def generate_report(state: InvestigationState) -> dict:
